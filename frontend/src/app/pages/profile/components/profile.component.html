@@ -1,1 +1,39 @@
-Profile!!
+<link rel="stylesheet" href="profile.component.css">
+<app-title [title]="'Tatyana Zayats'"></app-title>
+<div class="profile-content">
+  <div class="info">
+    <div>Sex: female</div>
+    <div>Date of birth: 15.10.2000</div>
+  </div>
+  <button mat-stroked-button class="form-button"*ngIf="!visibilityNewExamination" (click)="createForm()">New examination</button>
+  <ng-container class="new-examination" *ngIf="visibilityNewExamination">
+    <mat-card>
+      <mat-card-title>New examination</mat-card-title>
+      <mat-card-content>
+        <form [formGroup]="examinationForm">
+          <p>
+            <mat-form-field>
+              <mat-label>Type</mat-label>
+              <mat-select formControlName="type" required>
+                <mat-option value="Running">Running</mat-option>
+                <mat-option value="Walking">Walking</mat-option>
+                <mat-option value="Swimming">Swimming</mat-option>
+                <mat-option value="Strength exercises">Strength exercises</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </p>
+          <mat-selection-list #shoes>
+            <mat-list-option *ngFor="let sensor of typesOfSensors">
+              {{sensor}}
+            </mat-list-option>
+          </mat-selection-list>
+          <div class="button">
+            <button class="close-button" mat-stroked-button color="basic" (click)="close()">Close</button>
+            <button type="button" mat-stroked-button color="basic">Start</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </ng-container>
+</div>
+
