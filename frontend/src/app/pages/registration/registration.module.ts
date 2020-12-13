@@ -7,6 +7,7 @@ import {MatInputModule} from "@angular/material/input";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
 import {BrowserModule} from "@angular/platform-browser";
+import {MatRadioModule} from "@angular/material/radio";
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import {BrowserModule} from "@angular/platform-browser";
     MatCardModule,
     MatButtonModule,
     MatInputModule,
+    MatRadioModule,
   ],
   providers: [],
   exports: [RegistrationComponent]

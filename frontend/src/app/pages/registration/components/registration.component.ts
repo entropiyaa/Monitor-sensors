@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Subscription} from "rxjs";
 import {createHasError, HasErrorFunction} from "../../../util/has-error";
 import {validation} from "../../../util/validation";
@@ -9,6 +9,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {LoginService} from "../../../services/login.service";
 import {Login} from "../../../models/login";
 import {User} from "../../../models/user";
+import {Sex} from "../../../models/enums/sex";
 
 @Component({
   selector: 'app-registration',
@@ -21,6 +22,8 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   public registrationForm: FormGroup;
   public hasError: HasErrorFunction;
   public validation = validation;
+
+  public genders: Sex[] = [Sex.FEMALE, Sex.MALE];
 
   constructor(private loginService: LoginService,
               private userService: UserService,
@@ -48,8 +51,10 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   }
 
   public onSubmit(): void {
-    if(this.registrationForm.valid) {
+    if(this.registrationForm.valid && this.checkDate()) {
       this.existEmail();
+    } else {
+      this._snackBar.open('Incorrect form', '', {duration: 3000});
     }
   }
 
@@ -71,6 +76,13 @@ export class RegistrationComponent implements OnInit, OnDestroy {
         return {confirmation: true};
       }
     };
+  }
+
+  private checkDate(): boolean {
+    const date = new Date(this.registrationForm.get('birthday').value);
+    const now = new Date();
+    let difference = parseInt(now.getDate().toString()) - parseInt(date.getDate().toString());
+      return difference > 0;
   }
 
   private existEmail(): void {

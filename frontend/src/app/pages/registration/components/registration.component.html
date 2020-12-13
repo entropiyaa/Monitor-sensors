@@ -82,13 +82,15 @@
         </mat-error>
       </p>
       <p>
-        <mat-form-field>
-          <input type="text" matInput placeholder="Sex" id="sex" formControlName="sex">
-        </mat-form-field>
+        <mat-radio-group formControlName="sex" required>
+          <mat-radio-button *ngFor="let g of genders" [value]="g">
+            {{g}}
+          </mat-radio-button>
+        </mat-radio-group>
       </p>
       <p>
         <mat-form-field>
-          <input type="text" matInput placeholder="Date of Birth" id="birthday" formControlName="birthday">
+          <input type="date" matInput placeholder="Date of Birth" id="birthday" formControlName="birthday">
         </mat-form-field>
       </p>
       <div class="button">

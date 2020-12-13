@@ -29,3 +29,7 @@ mat-card {
 .sign-button {
   margin-right: 2%;
 }
+
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 25px;
+}
