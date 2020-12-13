@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,6 +9,10 @@ import {RegistrationModule} from "./pages/registration/registration.module";
 import {ProfileModule} from "./pages/profile/profile.module";
 import {UsersModule} from "./pages/users/users.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {UserService} from "./services/user.service";
+import {APIInterceptor} from "./interceptors/api-interceptor";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {AuthService} from "./services/auth.service";
 
 @NgModule({
   declarations: [
@@ -23,8 +27,20 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     ProfileModule,
     UsersModule,
     BrowserAnimationsModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [UserService, APIInterceptor, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: APIInterceptor,
+    multi: true
+  },
+    AuthService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (authService: AuthService) => () => authService.getCurrentUserFromServer(),
+      deps: [AuthService],
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

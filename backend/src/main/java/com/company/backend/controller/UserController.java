@@ -3,9 +3,8 @@ package com.company.backend.controller;
 import com.company.backend.entity.User;
 import com.company.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,8 +19,19 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping(value = "/all")
+    @GetMapping(value = "/{userId}")
+    public ResponseEntity<User> getUserById(@PathVariable(name = "userId") Long userId) {
+        User user = userService.findById(userId);
+        return ResponseEntity.ok(user);
+    }
+
+    @GetMapping
     public List<User> getUsers() {
         return userService.findAll();
+    }
+
+    @PostMapping
+    public User saveUser(@RequestBody User user) {
+        return userService.save(user);
     }
 }

@@ -1,9 +1,9 @@
 <link rel="stylesheet" href="profile.component.css">
-<app-title [title]="'Tatyana Zayats'"></app-title>
+<app-title [title]="currentUser.firstName + ' ' + currentUser.lastName"></app-title>
 <div class="profile-content">
   <div class="info">
-    <div>Sex: female</div>
-    <div>Date of birth: 15.10.2000</div>
+    <div>Sex: {{currentUser.sex}}</div>
+    <div>Date of birth: {{currentUser.birthday | date: 'dd/MM/yyyy'}}</div>
   </div>
   <button mat-stroked-button class="form-button"*ngIf="!visibilityNewExamination" (click)="createForm()">New examination</button>
   <ng-container class="new-examination" *ngIf="visibilityNewExamination">

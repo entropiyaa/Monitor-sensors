@@ -6,39 +6,94 @@
         <mat-form-field>
           <input type="text" matInput placeholder="Email" id="email" formControlName="email" required>
         </mat-form-field>
+        <mat-error *ngIf="hasError('email', 'required')">
+          Email is required
+        </mat-error>
+        <mat-error *ngIf="hasError('email', 'minlength')">
+          Email must be longer then {{validation.email.minlength}} characters
+        </mat-error>
+        <mat-error *ngIf="hasError('email', 'maxlength')">
+          Email must be at least {{validation.email.maxlength}} characters long
+        </mat-error>
+        <mat-error *ngIf="hasError('email', 'pattern')">
+          Incorrect email
+        </mat-error>
       </p>
       <p>
         <mat-form-field>
-          <input type="password" matInput placeholder="Password" id="password" formControlName="password" required>
+          <input type="password" matInput placeholder="Password" id="password" formControlName="password" (keyup)="updatePasswordConfirmation()" required>
         </mat-form-field>
+        <mat-error *ngIf="hasError('password', 'required')">
+          Password is required
+        </mat-error>
+        <mat-error *ngIf="hasError('password', 'minlength')">
+          Password must be longer then {{validation.password.minlength}} characters
+        </mat-error>
+        <mat-error *ngIf="hasError('password', 'maxlength')">
+          Password must be at least {{validation.password.maxlength}} characters long
+        </mat-error>
+        <mat-error *ngIf="hasError('password', 'pattern')">
+          Incorrect password, insert special character like :.,/!?+%]
+        </mat-error>
       </p>
       <p>
         <mat-form-field>
           <input type="password" matInput placeholder="Password Confirmation" formControlName="passwordConfirmation" required>
         </mat-form-field>
+        <mat-error *ngIf="hasError('passwordConfirmation', 'required')">
+          Password confirmation is required
+        </mat-error>
+        <mat-error *ngIf="hasError('passwordConfirmation', 'confirmation')">
+          Passwords don't match
+        </mat-error>
       </p>
       <p>
         <mat-form-field>
           <input type="text" matInput placeholder="First name" id="firstName" formControlName="firstName" required>
         </mat-form-field>
+        <mat-error *ngIf="hasError('firstName', 'required')">
+          First name is required
+        </mat-error>
+        <mat-error *ngIf="hasError('firstName', 'minlength')">
+          First name must be longer then {{validation.name.minlength}} characters
+        </mat-error>
+        <mat-error *ngIf="hasError('firstName', 'maxlength')">
+          First name must be at least {{validation.name.maxlength}} characters long
+        </mat-error>
+        <mat-error *ngIf="hasError('firstName', 'pattern')">
+          Incorrect first name, only letters
+        </mat-error>
       </p>
       <p>
         <mat-form-field>
           <input type="text" matInput placeholder="Last name" id="lastName" formControlName="lastName" required>
         </mat-form-field>
+        <mat-error *ngIf="hasError('lastName', 'required')">
+          Last name is required
+        </mat-error>
+        <mat-error *ngIf="hasError('lastName', 'minlength')">
+          Last name must be longer then {{validation.name.minlength}} characters
+        </mat-error>
+        <mat-error *ngIf="hasError('lastName', 'maxlength')">
+          Last name must be at least {{validation.name.maxlength}} characters long
+        </mat-error>
+        <mat-error *ngIf="hasError('lastName', 'pattern')">
+          Incorrect last name, only letters
+        </mat-error>
       </p>
       <p>
         <mat-form-field>
-          <input type="text" matInput placeholder="Sex" id="sex" formControlName="sex" required>
+          <input type="text" matInput placeholder="Sex" id="sex" formControlName="sex">
         </mat-form-field>
       </p>
       <p>
         <mat-form-field>
-          <input type="text" matInput placeholder="Date of Birth" id="birthday" formControlName="birthday" required>
+          <input type="text" matInput placeholder="Date of Birth" id="birthday" formControlName="birthday">
         </mat-form-field>
       </p>
       <div class="button">
-        <button class="sign-button" mat-stroked-button color="basic" type="submit">Sign up</button>
+        <button class="sign-button" mat-stroked-button color="basic" type="submit"
+                [disabled]="registrationForm.invalid" (click)="onSubmit()">Sign up</button>
         <button routerLink="/login" type="button" mat-stroked-button color="basic">Sign in</button>
       </div>
     </form>

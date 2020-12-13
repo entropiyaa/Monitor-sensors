@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from "../../../models/user";
+import {Sex} from "../../../models/enums/sex";
+import {Subscription} from "rxjs";
+import {UserService} from "../../../services/user.service";
 
 @Component({
   selector: 'app-users',
@@ -8,19 +11,37 @@ import {User} from "../../../models/user";
 })
 export class UsersComponent implements OnInit {
 
-  public users: User[] = [new User("Tatyana", "Zayats", "female", "15.10.2000"),
-    new User("Tatyana", "Zayats", "female", "15.10.2000"),
-    new User("Tatyana", "Zayats", "female", "15.10.2000"),
-    new User("Tatyana", "Zayats", "female", "15.10.2000"),
-    new User("Tatyana", "Zayats", "female", "15.10.2000"),
-    new User("Tatyana", "Zayats", "female", "15.10.2000"),
-    new User("Tatyana", "Zayats", "female", "15.10.2000"),
-    new User("Tatyana", "Zayats", "female", "15.10.2000"),
-    new User("Tatyana", "Zayats", "female", "15.10.2000")];
+  private subscriptions: Subscription[] = [];
+  public users: User[] = [];
   displayedColumns: string[] = ['first name', 'last name', 'sex', 'date of birth'];
 
-  ngOnInit(): void {
+  constructor(private userService: UserService) {}
 
+  ngOnInit(): void {
+    this.getUsers();
+  }
+
+  private getUsers(): void {
+    this.subscriptions.push(this.userService.getUsers()
+      .subscribe(users => {
+        this.users = users;
+      }));
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(
+      (subscription) => subscription.unsubscribe());
+    this.subscriptions = [];
   }
 
 }
+
+// public users: User[] = [new User("Tatyana", "Zayats", Sex.FEMALE, "15.10.2000"),
+//   new User("Tatyana", "Zayats", Sex.FEMALE, "15.10.2000"),
+//   new User("Tatyana", "Zayats", Sex.FEMALE, "15.10.2000"),
+//   new User("Tatyana", "Zayats", Sex.FEMALE, "15.10.2000"),
+//   new User("Tatyana", "Zayats", Sex.FEMALE, "15.10.2000"),
+//   new User("Tatyana", "Zayats", Sex.FEMALE, "15.10.2000"),
+//   new User("Tatyana", "Zayats", Sex.FEMALE, "15.10.2000"),
+//   new User("Tatyana", "Zayats", Sex.FEMALE, "15.10.2000"),
+//   new User("Tatyana", "Zayats", Sex.FEMALE, "15.10.2000")];
