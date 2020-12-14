@@ -78,4 +78,12 @@ public class Examination {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public List<Sensor> getSensors() {
+        return sensors;
+    }
+
+    public void setSensors(List<Sensor> sensors) {
+        this.sensors = sensors;
+    }
 }
