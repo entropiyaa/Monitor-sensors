@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -31,5 +32,10 @@ public class ExaminationServiceImpl implements ExaminationService {
     public Examination findById(Long id) {
         Optional<Examination> optionalExamination = examinationRepository.findById(id);
         return optionalExamination.orElse(null);
+    }
+
+    @Override
+    public List<Examination> findAllByUserId(Long id) {
+        return examinationRepository.findAllByUserId(id);
     }
 }
