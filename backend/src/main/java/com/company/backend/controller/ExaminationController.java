@@ -1,6 +1,8 @@
 package com.company.backend.controller;
 
+import com.company.backend.dto.ResultsDTO;
 import com.company.backend.entity.Examination;
+import com.company.backend.entity.SetupSensor;
 import com.company.backend.service.ExaminationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +22,7 @@ public class ExaminationController {
 
     @PostMapping(value = "/register")
     public Examination registerExamination(@RequestBody Examination examination) {
-        return examinationService.save(examination);
+        return examinationService.register(examination);
     }
 
     @GetMapping(value = "/{examId}")
@@ -33,4 +35,13 @@ public class ExaminationController {
         return examinationService.findAllByUserId(id);
     }
 
+    @PutMapping(value = "/start/{examId}")
+    public ResultsDTO startExamination(@PathVariable(name = "examId") Long id) {
+        return examinationService.startExamination(id);
+    }
+
+    @PostMapping(value = "setup")
+    public void setup(@RequestBody SetupSensor setupSensor) {
+        examinationService.setup(setupSensor);
+    }
 }

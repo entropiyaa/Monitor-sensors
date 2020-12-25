@@ -15,15 +15,30 @@ public class Sensor {
     private Long id;
 
     @Column(name = "name")
+    @Enumerated(EnumType.STRING)
     private SensorName name;
 
     @Column(name = "condition")
     private boolean condition;
 
+    @Column(name = "min")
+    private int min;
+
+    @Column(name = "max")
+    private int max;
+
     @ManyToMany(mappedBy = "sensors")
-    List<Examination> examinations;
+    private List<Examination> examinations;
 
     public Sensor() {}
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public SensorName getName() {
         return name;
@@ -39,5 +54,29 @@ public class Sensor {
 
     public void setCondition(boolean condition) {
         this.condition = condition;
+    }
+
+    public int getMin() {
+        return min;
+    }
+
+    public void setMin(int min) {
+        this.min = min;
+    }
+
+    public int getMax() {
+        return max;
+    }
+
+    public void setMax(int max) {
+        this.max = max;
+    }
+
+    public List<Examination> getExaminations() {
+        return examinations;
+    }
+
+    public void setExaminations(List<Examination> examinations) {
+        this.examinations = examinations;
     }
 }

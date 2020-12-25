@@ -3,6 +3,7 @@ package com.company.backend.entity;
 import java.util.List;
 
 public class SetupSensor {
+
     private Long examination;
     private List<Long> sensors;
 

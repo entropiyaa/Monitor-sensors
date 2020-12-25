@@ -37,6 +37,7 @@ public class Examination {
                     @JoinColumn(name = "examination_id", referencedColumnName = "id")},
             inverseJoinColumns = {
                     @JoinColumn(name = "sensor_id", referencedColumnName = "id")})
+    private
     List<Sensor> sensors;
 
     public Long getId() {
