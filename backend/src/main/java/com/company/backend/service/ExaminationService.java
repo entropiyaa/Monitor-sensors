@@ -11,6 +11,6 @@ public interface ExaminationService {
     Examination findById(Long id);
     Examination register(Examination examination);
     List<Examination> findAllByUserId(Long id);
-    ResultsDTO startExamination(Long id);
+    List<ResultsDTO> startExamination(Long id);
     void setup(SetupSensor setupSensor);
 }

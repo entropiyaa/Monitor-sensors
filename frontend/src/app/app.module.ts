@@ -13,10 +13,13 @@ import {UserService} from "./services/user.service";
 import {APIInterceptor} from "./interceptors/api-interceptor";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AuthService} from "./services/auth.service";
+import {ChartsModule} from "ng2-charts";
+import {LineChartComponent} from "./modules/charts/components/line-chart.component";
+import {LineChartModule} from "./modules/charts/line-chart.module";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,6 +31,7 @@ import {AuthService} from "./services/auth.service";
     UsersModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    LineChartModule
   ],
   providers: [UserService, APIInterceptor, {
     provide: HTTP_INTERCEPTORS,
@@ -41,6 +45,9 @@ import {AuthService} from "./services/auth.service";
       deps: [AuthService],
       multi: true
     }],
+  exports: [
+    LineChartComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

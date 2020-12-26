@@ -10,6 +10,7 @@ import {ExaminationService} from "../../../services/examination.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ExaminationsComponent} from "../../../modules/examinations/components/examinations.component";
 import {SetupSensor} from "../../../models/setupSensor";
+import {Results} from "../../../models/results";
 
 @Component({
   selector: 'app-profile',
@@ -21,11 +22,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
   public currentUser: User;
   public currentExam: Examination;
+  public results: Results[];
 
   public examinationForm: FormGroup;
   public visibilityNewExamination: boolean = false;
   public visibilityExaminations: boolean = false;
   public visibilityCurrentExam: boolean = false;
+  public visibilityStartButton: boolean = false;
 
   constructor(private storageService: StorageService,
               private userService: UserService,
@@ -44,6 +47,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       sensors: [''],
     });
     this.visibilityNewExamination = true;
+    this.visibilityCurrentExam = false;
   }
 
   public registerExamination(examination: Examination): void {
@@ -51,6 +55,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       .subscribe(examination => {
         this.setupSensors(examination.id);
         this.visibilityCurrentExam = true;
+        this.visibilityStartButton = true;
         this.currentExam = examination;
     }))
   }
@@ -74,7 +79,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
   public startExamination(): void {
     this.subscriptions.push(this.examinationService.startExamination(this.currentExam.id)
       .subscribe(results => {
-        console.log(results);
+         this.results = results;
+         this.visibilityStartButton = false;
       }));
   }
 

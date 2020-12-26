@@ -12,6 +12,8 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatSelectModule} from "@angular/material/select";
 import {MatListModule} from "@angular/material/list";
 import {ExaminationsModule} from "../../modules/examinations/examinations.module";
+import {AppModule} from "../../app.module";
+import {LineChartModule} from "../../modules/charts/line-chart.module";
 
 
 @NgModule({
@@ -32,6 +34,7 @@ import {ExaminationsModule} from "../../modules/examinations/examinations.module
     MatSelectModule,
     MatListModule,
     ExaminationsModule,
+    LineChartModule,
   ],
   providers: [],
   exports: [ProfileComponent]

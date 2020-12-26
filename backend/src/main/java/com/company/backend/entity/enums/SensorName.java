@@ -1,9 +1,9 @@
 package com.company.backend.entity.enums;
 
 public enum SensorName {
-    Blood_pressure_measurements,
-    Skin_temperature_measurements,
-    Skin_moisture_measurements,
-    Measurements_of_electrical_conductivity_of_the_skin,
-    Heart_rate_heart_rate_measurements
+    Blood_pressure,
+    Skin_temperature,
+    Skin_moisture,
+    Electrical_conductivity_of_the_skin,
+    Heart_rate
 }

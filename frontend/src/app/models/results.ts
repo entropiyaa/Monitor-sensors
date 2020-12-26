@@ -1,3 +1,4 @@
 export class Results {
-  resultsMap: Map<string, number[]>;
+  name: string;
+  results: number[];
 }

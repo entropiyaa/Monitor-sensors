@@ -26,7 +26,7 @@ export class ExaminationService {
     return this.http.post<void>(this.examinationUrl + '/setup', setupSensors);
   }
 
-  public startExamination(id: number): Observable<Results> {
-    return this.http.put<Results>(this.examinationUrl + '/start/' + id, null);
+  public startExamination(id: number): Observable<Results[]> {
+    return this.http.put<Results[]>(this.examinationUrl + '/start/' + id, null);
   }
 }

@@ -38,7 +38,7 @@ public class ExaminationController {
     }
 
     @PutMapping(value = "/start/{examId}")
-    public ResultsDTO startExamination(@PathVariable(name = "examId") Long id) {
+    public List<ResultsDTO> startExamination(@PathVariable(name = "examId") Long id) {
         return examinationService.startExamination(id);
     }
 

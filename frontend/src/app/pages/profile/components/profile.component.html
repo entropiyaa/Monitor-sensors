@@ -29,11 +29,11 @@
             </mat-form-field>
           </p>
           <mat-selection-list formControlName="sensors" >
-            <mat-list-option value="1">Blood pressure measurements</mat-list-option>
-            <mat-list-option value="2">Skin temperature measurements</mat-list-option>
-            <mat-list-option value="3">Skin moisture measurements</mat-list-option>
-            <mat-list-option value="4">Measurements of electrical conductivity of the skin</mat-list-option>
-            <mat-list-option value="5">Heart rate heart rate measurements</mat-list-option>
+            <mat-list-option value="1">Blood pressure</mat-list-option>
+            <mat-list-option value="2">Skin temperature</mat-list-option>
+            <mat-list-option value="3">Skin moisture</mat-list-option>
+            <mat-list-option value="4">Electrical conductivity of the skin</mat-list-option>
+            <mat-list-option value="5">Heart rate</mat-list-option>
           </mat-selection-list>
           <div class="button">
             <button class="close-button" mat-stroked-button color="basic" (click)="close()">Close</button>
@@ -47,8 +47,15 @@
     <div>
       <div> Type: {{currentExam.type}} </div>
       <div> Date: {{currentExam.date | date: 'dd/MM/yyyy'}} </div>
-      <button class="start-button" mat-stroked-button color="basic" (click)="startExamination()">Start</button>
+      <ng-container *ngIf="visibilityStartButton">
+        <button class="start-button" mat-stroked-button color="basic" (click)="startExamination()">Start</button>
+      </ng-container>
     </div>
+    <ul class="ul-charts">
+      <li *ngFor="let result of results" class="li-charts">
+        <app-line-chart [label]="result?.name" [resultsArray]="result?.results"></app-line-chart>
+      </li>
+    </ul>
   </ng-container>
 </div>
 

@@ -1,5 +1,5 @@
-<div style="display: block">
-  <canvas mdbChart
+<div class="my-chart" style="display: block">
+  <canvas baseChart
           [chartType]="chartType"
           [datasets]="chartDatasets"
           [labels]="chartLabels"
@@ -9,4 +9,7 @@
           (chartHover)="chartHovered($event)"
           (chartClick)="chartClicked($event)">
   </canvas>
+  <ng-container *ngIf="resultsArray == null">
+    <div>Defective sensor!!</div>
+  </ng-container>
 </div>

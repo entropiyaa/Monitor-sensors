@@ -44,3 +44,11 @@ mat-card {
 .start-button {
   margin-top: 30px;
 }
+
+.ul-charts {
+  list-style-type: none;
+}
+
+.li-charts {
+  height: 380px;
+}

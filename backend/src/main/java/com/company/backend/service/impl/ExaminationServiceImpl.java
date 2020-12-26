@@ -11,6 +11,7 @@ import com.company.backend.service.SensorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -51,16 +52,19 @@ public class ExaminationServiceImpl implements ExaminationService {
     }
 
     @Override
-    public ResultsDTO startExamination(Long id) {
+    public List<ResultsDTO> startExamination(Long id) {
         Examination examination = findById(id);
-        ResultsDTO resultsDTO = new ResultsDTO();
+//        ResultsDTO resultsDTO = new ResultsDTO();
+        List<ResultsDTO> resultsList = new ArrayList<>();
         double[] results;
         for(Sensor s: examination.getSensors()) {
              results = sensorService.generateResults(s);
-             resultsDTO.getMapResults().put(s.getName(), results);
+//             resultsDTO.getMapResults().put(s.getName(), results);
+            ResultsDTO resultsDTO = new ResultsDTO(s.getName(), results);
+            resultsList.add(resultsDTO);
         }
         finishExamination(examination);
-        return resultsDTO;
+        return resultsList;
     }
 
     public void finishExamination(Examination examination) {
