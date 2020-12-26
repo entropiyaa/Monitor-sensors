@@ -1,6 +1,7 @@
 package com.company.backend.entity;
 
 import com.company.backend.entity.enums.SensorName;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.List;
@@ -28,6 +29,7 @@ public class Sensor {
     private int max;
 
     @ManyToMany(mappedBy = "sensors")
+    @JsonIgnore
     private List<Examination> examinations;
 
     public Sensor() {}

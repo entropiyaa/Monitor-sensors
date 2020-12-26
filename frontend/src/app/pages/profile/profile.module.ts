@@ -11,6 +11,7 @@ import {MatCardModule} from "@angular/material/card";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatSelectModule} from "@angular/material/select";
 import {MatListModule} from "@angular/material/list";
+import {ExaminationsModule} from "../../modules/examinations/examinations.module";
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import {MatListModule} from "@angular/material/list";
     MatAutocompleteModule,
     MatSelectModule,
     MatListModule,
+    ExaminationsModule,
   ],
   providers: [],
   exports: [ProfileComponent]

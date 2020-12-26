@@ -5,7 +5,13 @@
     <div>Sex: {{currentUser.sex}}</div>
     <div>Date of birth: {{currentUser.birthday | date: 'dd/MM/yyyy'}}</div>
   </div>
-  <button mat-stroked-button class="form-button"*ngIf="!visibilityNewExamination" (click)="createForm()">New examination</button>
+  <button mat-stroked-button (click)="changeVisibilityExaminations()">My examinations</button>
+  <button mat-stroked-button class="form-button" *ngIf="!visibilityNewExamination" (click)="createForm()">New examination</button>
+  <ng-container *ngIf="visibilityExaminations">
+    <div>
+      <app-examinations [user]="currentUser"></app-examinations>
+    </div>
+  </ng-container>
   <ng-container class="new-examination" *ngIf="visibilityNewExamination">
     <mat-card>
       <mat-card-title>New examination</mat-card-title>
@@ -22,18 +28,27 @@
               </mat-select>
             </mat-form-field>
           </p>
-          <mat-selection-list #shoes>
-            <mat-list-option *ngFor="let sensor of typesOfSensors">
-              {{sensor}}
-            </mat-list-option>
+          <mat-selection-list formControlName="sensors" >
+            <mat-list-option value="1">Blood pressure measurements</mat-list-option>
+            <mat-list-option value="2">Skin temperature measurements</mat-list-option>
+            <mat-list-option value="3">Skin moisture measurements</mat-list-option>
+            <mat-list-option value="4">Measurements of electrical conductivity of the skin</mat-list-option>
+            <mat-list-option value="5">Heart rate heart rate measurements</mat-list-option>
           </mat-selection-list>
           <div class="button">
             <button class="close-button" mat-stroked-button color="basic" (click)="close()">Close</button>
-            <button type="button" mat-stroked-button color="basic">Start</button>
+            <button type="button" mat-stroked-button color="basic" (click)="onSubmit()">Register</button>
           </div>
         </form>
       </mat-card-content>
     </mat-card>
+  </ng-container>
+  <ng-container *ngIf="visibilityCurrentExam">
+    <div>
+      <div> Type: {{currentExam.type}} </div>
+      <div> Date: {{currentExam.date | date: 'dd/MM/yyyy'}} </div>
+      <button class="start-button" mat-stroked-button color="basic" (click)="startExamination()">Start</button>
+    </div>
   </ng-container>
 </div>
 

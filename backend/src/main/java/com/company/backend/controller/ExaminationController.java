@@ -5,12 +5,14 @@ import com.company.backend.entity.Examination;
 import com.company.backend.entity.SetupSensor;
 import com.company.backend.service.ExaminationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/examinations")
+@PreAuthorize("isAuthenticated()")
 public class ExaminationController {
 
     private ExaminationService examinationService;

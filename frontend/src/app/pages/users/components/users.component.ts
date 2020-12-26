@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from "../../../models/user";
-import {Sex} from "../../../models/enums/sex";
 import {Subscription} from "rxjs";
 import {UserService} from "../../../services/user.service";
 
@@ -35,13 +34,3 @@ export class UsersComponent implements OnInit {
   }
 
 }
-
-// public users: User[] = [new User("Tatyana", "Zayats", Sex.FEMALE, "15.10.2000"),
-//   new User("Tatyana", "Zayats", Sex.FEMALE, "15.10.2000"),
-//   new User("Tatyana", "Zayats", Sex.FEMALE, "15.10.2000"),
-//   new User("Tatyana", "Zayats", Sex.FEMALE, "15.10.2000"),
-//   new User("Tatyana", "Zayats", Sex.FEMALE, "15.10.2000"),
-//   new User("Tatyana", "Zayats", Sex.FEMALE, "15.10.2000"),
-//   new User("Tatyana", "Zayats", Sex.FEMALE, "15.10.2000"),
-//   new User("Tatyana", "Zayats", Sex.FEMALE, "15.10.2000"),
-//   new User("Tatyana", "Zayats", Sex.FEMALE, "15.10.2000")];

@@ -14,6 +14,7 @@ import java.util.List;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/logins")
+@PreAuthorize("isAuthenticated()")
 public class LoginController {
 
     private LoginService loginService;
@@ -24,11 +25,13 @@ public class LoginController {
     }
 
     @GetMapping(value = "/login/{email}")
+    @PreAuthorize("isAnonymous()")
     public Login getLogin(@PathVariable(name = "email") String email) {
         return loginService.findLoginByEmail(email);
     }
 
     @GetMapping(value = "/user/{email}")
+    @PreAuthorize("isAnonymous()")
     public User getUserByEmail(@PathVariable(name = "email") String email) {
         return  loginService.findUserByEmail(email);
     }
@@ -39,7 +42,6 @@ public class LoginController {
         return loginService.findAll();
     }
 
-    @PreAuthorize("isAuthenticated()")
     @GetMapping(value = "/current")
     public User getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
