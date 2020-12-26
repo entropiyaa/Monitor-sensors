@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Subscription} from "rxjs";
 import {createHasError, HasErrorFunction} from "../../../util/has-error";
 import {validation} from "../../../util/validation";
@@ -52,7 +52,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
 
   public onSubmit(): void {
     if(this.registrationForm.valid && this.checkDate()) {
-      this.existEmail();
+      this.createLoginModel();
     } else {
       this._snackBar.open('Incorrect form', '', {duration: 3000});
     }
@@ -63,7 +63,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       this.clear();
       this._snackBar.open('Registration completed', '', {duration: 3000});
       this.router.navigate(['login']);
-    }))
+    }, error => this.emailErr()))
   }
 
   private passwordConfirmation() {
@@ -83,17 +83,6 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     const now = new Date();
     let difference = parseInt(now.getDate().toString()) - parseInt(date.getDate().toString());
       return difference > 0;
-  }
-
-  private existEmail(): void {
-    this.subscriptions.push(this.loginService
-      .getLoginByEmail(this.registrationForm.value.email).subscribe(login => {
-        if(!login) {
-          this.createLoginModel();
-        } else {
-          this.emailErr();
-        }
-      }));
   }
 
   private emailErr(): void {
